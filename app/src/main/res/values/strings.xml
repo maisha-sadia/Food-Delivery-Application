@@ -1,3 +1,33 @@
 <resources>
     <string name="app_name">Food Delivery App</string>
+    <string name="home">Home</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="notifications">Notifications</string>
+
+    <string-array name="location">
+        <item>Liverpool</item>
+        <item>Manchester</item>
+    </string-array>
+
+    <string-array name="driver">
+        <item>Driver 1</item>
+        <item>Driver 2</item>
+    </string-array>
+
+    <string-array name="menuItems">
+        <item>Minestra di pasta con pesce</item>
+        <item>Minestrone</item>
+        <item>Pasta e fagioli</item>
+        <item>Ragù alla bolognese</item>
+        <item>Ragù alla napoletana</item>
+        <item>Ragù alla salsiccia</item>
+        <item>Ragù </item>
+        <item>Risi e bisi</item>
+        <item>Sciusceddu</item>
+        <item>Stracciatella</item>
+        <item>Boreto</item>
+        <item>Fonduta</item>
+        <item>Minestra di fagioli</item>
+        <item>Pesto</item>
+    </string-array>
 </resources>
