@@ -15,4 +15,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:src="@drawable/ic_fast_food_logo" />
+
+    <TextView
+        android:id="@+id/ownerName"
+        android:layout_width="220dp"
+        android:layout_height="30dp"
+        android:fontFamily="cursive"
+        android:text="Maisha Sadia"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="#CD5BA5"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintVertical_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/starting_logo" />
 </androidx.constraintlayout.widget.ConstraintLayout>
