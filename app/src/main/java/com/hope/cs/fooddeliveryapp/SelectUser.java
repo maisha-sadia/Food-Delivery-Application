@@ -76,14 +76,17 @@ public class SelectUser extends AppCompatActivity {
             public void onClick(View view) {
                 if(type.equals("Email")){
                     Intent emailLogin = new Intent(SelectUser.this,RestaurantEmailLogin.class);
+                    emailLogin.putExtra("Role","Restaurant");
                     startActivity(emailLogin);
                     finish();
                 } if(type.equals("Phone")){
                     Intent phoneLogin = new Intent(SelectUser.this,RestaurantPhoneLogin.class);
+                    phoneLogin.putExtra("Role","Restaurant");
                     startActivity(phoneLogin);
                     finish();
                 } if(type.equals("Register")){
                     Intent registration = new Intent(SelectUser.this,RestaurantRegistration.class);
+                    registration.putExtra("Role","Restaurant");
                     startActivity(registration);
                     finish();
                 }
@@ -93,15 +96,18 @@ public class SelectUser extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(type.equals("Email")){
-                    Intent emailLogin = new Intent(SelectUser.this,CustomerEmailLogin.class);
+                    Intent emailLogin = new Intent(SelectUser.this,RestaurantEmailLogin.class);
+                    emailLogin.putExtra("Role","Customer");
                     startActivity(emailLogin);
                     finish();
                 } if(type.equals("Phone")){
-                    Intent phoneLogin = new Intent(SelectUser.this,CustomerPhoneLogin.class);
+                    Intent phoneLogin = new Intent(SelectUser.this,RestaurantPhoneLogin.class);
+                    phoneLogin.putExtra("Role","Customer");
                     startActivity(phoneLogin);
                     finish();
                 } if(type.equals("Register")){
-                    Intent registration = new Intent(SelectUser.this,CustomerRegistration.class);
+                    Intent registration = new Intent(SelectUser.this,RestaurantRegistration.class);
+                    registration.putExtra("Role","Customer");
                     startActivity(registration);
                     finish();
                 }
@@ -111,15 +117,18 @@ public class SelectUser extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(type.equals("Email")){
-                    Intent emailLogin = new Intent(SelectUser.this,DeliveryGuyEmailLogin.class);
+                    Intent emailLogin = new Intent(SelectUser.this,RestaurantEmailLogin.class);
+                    emailLogin.putExtra("Role","DeliveryGuy");
                     startActivity(emailLogin);
                     finish();
                 } if(type.equals("Phone")){
-                    Intent phoneLogin = new Intent(SelectUser.this,DeliveryGuyPhoneLogin.class);
+                    Intent phoneLogin = new Intent(SelectUser.this,RestaurantPhoneLogin.class);
+                    phoneLogin.putExtra("Role","DeliveryGuy");
                     startActivity(phoneLogin);
                     finish();
                 } if(type.equals("Register")){
-                    Intent registration = new Intent(SelectUser.this,DeliveryGuyRegistration.class);
+                    Intent registration = new Intent(SelectUser.this,RestaurantRegistration.class);
+                    registration.putExtra("Role","DeliveryGuy");
                     startActivity(registration);
                     finish();
                 }

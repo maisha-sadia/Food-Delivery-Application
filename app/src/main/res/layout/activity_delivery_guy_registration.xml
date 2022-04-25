@@ -51,7 +51,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/loginEmailAddress"
+                android:id="@+id/emailAddress"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="15dp">
@@ -66,7 +66,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/passeword"
+                android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="15dp"
@@ -169,22 +169,11 @@
                 android:textSize="14sp" />
 
             <Spinner
-                android:id="@+id/City"
+                android:id="@+id/city"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:entries="@array/location" />
-
-            <Button
-                android:id="@+id/newRegister"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="20dp"
-                android:background="#239595"
-                android:text="Register"
-                android:textAllCaps="true"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -239,7 +228,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/loginEmailAddress"
+                    android:id="@+id/emailAddress"
                     android:layout_width="95dp"
                     android:layout_height="40dp"
                     android:layout_marginLeft="15dp"

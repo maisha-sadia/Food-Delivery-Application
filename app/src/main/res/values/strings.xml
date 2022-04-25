@@ -5,8 +5,8 @@
     <string name="notifications">Notifications</string>
 
     <string-array name="location">
-        <item>Liverpool</item>
-        <item>Manchester</item>
+        <item>Merseyside</item>
+        <item>Greater Manchester</item>
     </string-array>
 
     <string-array name="driver">
