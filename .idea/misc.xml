@@ -7,8 +7,10 @@
         <entry key="app/src/main/res/datasets/drawable/ic_fast_food_logo.xml" value="0.225" />
         <entry key="app/src/main/res/datasets/drawable/ic_fast_food_splash_logo.xml" value="0.233" />
         <entry key="app/src/main/res/layout/activity_customer_registration.xml" value="0.23641304347826086" />
+        <entry key="app/src/main/res/layout/activity_delivery_guy_registration.xml" value="0.20885416666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2328125" />
         <entry key="app/src/main/res/layout/activity_main_menu.xml" value="0.12" />
+        <entry key="app/src/main/res/layout/activity_restaurant_email_login.xml" value="0.20885416666666667" />
         <entry key="app/src/main/res/layout/activity_restaurant_phone_login.xml" value="0.20885416666666667" />
         <entry key="app/src/main/res/layout/activity_restaurant_registration.xml" value="0.20885416666666667" />
         <entry key="app/src/main/res/layout/activity_select_user.xml" value="0.2" />

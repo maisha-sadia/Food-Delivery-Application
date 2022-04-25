@@ -63,9 +63,9 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        loginWithEmail = (Button)findViewById(R.id.emailLogin);
-        loginWithPhone = (Button)findViewById(R.id.phoneLogin);
-        register = (Button)findViewById(R.id.register);
+        loginWithEmail = (Button)findViewById(R.id.emailLoginButton);
+        loginWithPhone = (Button)findViewById(R.id.phoneLoginButton);
+        register = (Button)findViewById(R.id.registerButton);
 
         loginWithEmail.setOnClickListener(new View.OnClickListener() {
             @Override
