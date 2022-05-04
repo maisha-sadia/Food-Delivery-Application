@@ -139,7 +139,7 @@ public class RestaurantRegistration extends AppCompatActivity {
 //                                            databaseReference = FirebaseDatabase.getInstance().getReference("Customer").child(userId);
 //                                        }if(role.equals("DeliveryGuy")){
 //                                            databaseReference = FirebaseDatabase.getInstance().getReference("DeliveryGuy").child(userId);
-//                                        }
+//                                        }ßß
                                         final HashMap<String, String> hashMap = new HashMap<>();
                                         hashMap.put("Role",role);
 
