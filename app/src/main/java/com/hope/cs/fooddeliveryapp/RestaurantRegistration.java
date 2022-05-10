@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
@@ -24,7 +23,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.hbb20.CountryCodePicker;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -49,7 +47,7 @@ public class RestaurantRegistration extends AppCompatActivity {
 
         forename = (TextInputLayout)findViewById(R.id.forename);
         surname = (TextInputLayout)findViewById(R.id.surname);
-        email = (TextInputLayout)findViewById(R.id.emailAddress);
+        email = (TextInputLayout)findViewById(R.id.LoginEmailAddress);
         password = (TextInputLayout)findViewById(R.id.password);
         confirmPassword = (TextInputLayout)findViewById(R.id.confirmPassword);
         phoneNumber = (TextInputLayout)findViewById(R.id.phoneNumber);
@@ -173,7 +171,7 @@ public class RestaurantRegistration extends AppCompatActivity {
                                                             Alert.show();
                                                         }else{
                                                             mDialog.dismiss();
-                                                            AlertDialogueBox.showAlert(RestaurantRegistration.this,"Error",task.getException().getMessage());
+                                                            AlertDialogueBox.showAlert(RestaurantRegistration.this,"Unexpected Error",task.getException().getMessage());
                                                         }
                                                     }
                                                 });

@@ -12,13 +12,13 @@
         android:theme="@style/Theme.FoodDeliveryApp"
         tools:replace="android:theme">
         <activity
-            android:name=".DeliveryGuyEmailLogin"
+            android:name=".RestaurantSendOTP"
             android:exported="false" />
         <activity
-            android:name=".DeliveryGuyPhoneLogin"
+            android:name=".RestaurantForgotPassword"
             android:exported="false" />
         <activity
-            android:name=".DeliveryGuyRegistration"
+            android:name=".RestaurantPanel_BottomNav"
             android:exported="false" />
         <activity
             android:name=".RestaurantRegistration"
@@ -28,15 +28,6 @@
             android:exported="false" />
         <activity
             android:name=".RestaurantEmailLogin"
-            android:exported="false" />
-        <activity
-            android:name=".CustomerRegistration"
-            android:exported="false" />
-        <activity
-            android:name=".CustomerPhoneLogin"
-            android:exported="false" />
-        <activity
-            android:name=".CustomerEmailLogin"
             android:exported="false" />
         <activity
             android:name=".SelectUser"

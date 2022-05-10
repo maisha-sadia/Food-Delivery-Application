@@ -52,7 +52,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/emailAddress"
+                android:id="@+id/LoginEmailAddress"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="15dp">
@@ -105,7 +105,8 @@
                 <com.hbb20.CountryCodePicker
                     android:id="@+id/countryCodeRegistration"
                     android:layout_width="120dp"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    app:ccp_defaultNameCode="GB">
 
                 </com.hbb20.CountryCodePicker>
 
@@ -240,7 +241,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/emailAddress"
+                    android:id="@+id/LoginEmailAddress"
                     android:layout_width="95dp"
                     android:layout_height="40dp"
                     android:layout_marginLeft="15dp"

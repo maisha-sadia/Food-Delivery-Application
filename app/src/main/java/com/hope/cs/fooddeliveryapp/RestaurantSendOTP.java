@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class CustomerEmailLogin extends AppCompatActivity {
+public class RestaurantSendOTP extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_email_login);
+        setContentView(R.layout.activity_restaurant_send_otp);
     }
 }
