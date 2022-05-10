@@ -1,7 +1,5 @@
 package com.hope.cs.fooddeliveryapp;
 
-import static android.content.ContentValues.TAG;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,22 +9,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthException;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.hbb20.CountryCodePicker;
@@ -34,24 +27,23 @@ import com.hbb20.CountryCodePicker;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class RestaurantRegistration extends AppCompatActivity {
 
-    String[] Merseyside = {"Liverpool","Formby"};
-    String[] Hampshire = {"City 1"};
+
+public class RestaurantRegistration extends AppCompatActivity {
+    String[] Maharashtra = {"Mumbai","Pune","Nashik"};
+    String[] Madhyapradesh = {"Bhopal","Indore","Ujjain"};
 
     TextInputLayout forename,surname,email,password,confirmPassword,phoneNumber,postCode,area,houseNumber;
-    Button register, emailSignInButton, phoneSignInButton;
     Spinner citySpin;
+    Button register, emailSignInButton, phoneSignInButton;
     CountryCodePicker Cpp;
-    FirebaseAuth firebaseAuth;
+    FirebaseAuth FAuth;
     DatabaseReference databaseReference;
     FirebaseDatabase firebaseDatabase;
-    String role, Fname,Sname,EmailId,Pass,CPass, PNum,HNum,PCode,Area, City;
+    String Fname,Sname,EmailId,Pass,CPass, PNum,HNum,PCode,Area, City;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        firebaseAuth = firebaseAuth.getInstance();
-        firebaseDatabase = firebaseDatabase.getInstance();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_registration);
 
@@ -70,8 +62,6 @@ public class RestaurantRegistration extends AppCompatActivity {
         register = (Button)findViewById(R.id.newRegister);
         emailSignInButton = (Button)findViewById(R.id.emailLoginButton);
         phoneSignInButton = (Button)findViewById(R.id.phoneLoginButton);
-
-        Cpp = (CountryCodePicker)findViewById(R.id.countryCodeRegistration);
 
         citySpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -102,14 +92,15 @@ public class RestaurantRegistration extends AppCompatActivity {
             }
         });
 
+        String role = getIntent().getStringExtra("Role").toString().trim();
 
-
-
-        role = getIntent().getStringExtra("Role").toString().trim();
+        databaseReference = firebaseDatabase.getInstance().getReference(role);
+        FAuth = FirebaseAuth.getInstance();
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+
                 Fname = forename.getEditText().getText().toString().trim();
                 Sname = surname.getEditText().getText().toString().trim();
                 EmailId = email.getEditText().getText().toString().trim();
@@ -120,206 +111,89 @@ public class RestaurantRegistration extends AppCompatActivity {
                 HNum = houseNumber.getEditText().getText().toString().trim();
                 PCode = postCode.getEditText().getText().toString().trim();
 
-                if(isValid()){
-                    final ProgressDialog dialog = new ProgressDialog(RestaurantRegistration.this);
-                    dialog.setCancelable(false);
-                    dialog.setCanceledOnTouchOutside(false);
-                    dialog.setMessage("Please wait");
-                    dialog.show();
-                    firebaseAuth.createUserWithEmailAndPassword(EmailId, Pass)
-                            .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()){
-                                        String userId = firebaseAuth.getCurrentUser().getUid();
-                                        databaseReference = firebaseDatabase.getReference(role).child(userId);
-//                                        if(role.equals("Restaurant")){
-//                                            databaseReference = FirebaseDatabase.getInstance().getReference("Restaurant").child(userId);
-//                                        }if(role.equals("Customer")){
-//                                            databaseReference = FirebaseDatabase.getInstance().getReference("Customer").child(userId);
-//                                        }if(role.equals("DeliveryGuy")){
-//                                            databaseReference = FirebaseDatabase.getInstance().getReference("DeliveryGuy").child(userId);
-//                                        }ßß
-                                        final HashMap<String, String> hashMap = new HashMap<>();
-                                        hashMap.put("Role",role);
+                if (isValid()){
+                    final ProgressDialog mDialog = new ProgressDialog(RestaurantRegistration.this);
+                    mDialog.setCancelable(false);
+                    mDialog.setCanceledOnTouchOutside(false);
+                    mDialog.setMessage("Please wait");
+                    mDialog.show();
 
-                                        databaseReference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    FAuth.createUserWithEmailAndPassword(EmailId,Pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+
+                            if (task.isSuccessful()){
+                                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                databaseReference = FirebaseDatabase.getInstance().getReference("User").child(userId);
+                                final HashMap<String , String> hashMap = new HashMap<>();
+                                hashMap.put("Role",role);
+                                databaseReference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                        HashMap<String,String> hashMap1 = new HashMap<>();
+                                        hashMap1.put("First Name",Fname);
+                                        hashMap1.put("Last Name",Sname);
+                                        hashMap1.put("Email Address",EmailId);
+                                        hashMap1.put("Phone Number",PNum);
+                                        hashMap1.put("Area",Area);
+                                        hashMap1.put("House Number",HNum);
+                                        hashMap1.put("Post Code",PCode);
+                                        hashMap1.put("Area",Area);
+                                        hashMap1.put("City",City);
+                                        hashMap1.put("Password",Pass);
+                                        hashMap1.put("Confirm Password",CPass);
+
+
+                                        firebaseDatabase.getInstance().getReference(role)
+                                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                .setValue(hashMap1).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
-                                                HashMap<String,String> hashMap1 = new HashMap<>();
-                                                hashMap1.put("First Name",Fname);
-                                                hashMap1.put("Last Name",Sname);
-                                                hashMap1.put("Email Address",EmailId);
-                                                hashMap1.put("Phone Number",PNum);
-                                                hashMap1.put("Area",Area);
-                                                hashMap1.put("House Number",HNum);
-                                                hashMap1.put("Post Code",PCode);
-                                                hashMap1.put("Area",Area);
-                                                hashMap1.put("City",City);
-                                                hashMap1.put("Password",Pass);
-                                                hashMap1.put("Confirm Password",CPass);
+                                                mDialog.dismiss();
 
-                                                firebaseDatabase.getReference(role).child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                                        .setValue(hashMap1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                FAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
-                                                        dialog.dismiss();
 
-                                                        firebaseAuth.getCurrentUser().sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                            @Override
-                                                            public void onSuccess(Void unused) {
-                                                                if (task.isSuccessful()) {
-                                                                    AlertDialog.Builder builder = new AlertDialog.Builder(RestaurantRegistration.this);
-                                                                    builder.setMessage("You have successfully registered! Please verify your email to login");
-                                                                    builder.setCancelable(false);
-                                                                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                                                        @Override
-                                                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                                                            dialog.dismiss();
-                                                                        }
-                                                                    });
-                                                                    AlertDialog alertDialog = builder.create();
-                                                                    alertDialog.show();
-                                                                } else {
+                                                        if(task.isSuccessful()){
+                                                            AlertDialog.Builder builder = new AlertDialog.Builder(RestaurantRegistration.this);
+                                                            builder.setMessage("You Have Registered! Make Sure To Verify Your Email");
+                                                            builder.setCancelable(false);
+                                                            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(DialogInterface dialog, int which) {
+
                                                                     dialog.dismiss();
-                                                                    AlertDialogueBox.showAlert(RestaurantRegistration.this, "Error", task.getException().getMessage());
+                                                                    Intent loginPage = new Intent(RestaurantRegistration.this,RestaurantEmailLogin.class);
+                                                                    startActivity(loginPage);
                                                                 }
-
-
-                                                            }
-                                                        });
+                                                            });
+                                                            AlertDialog Alert = builder.create();
+                                                            Alert.show();
+                                                        }else{
+                                                            mDialog.dismiss();
+                                                            AlertDialogueBox.showAlert(RestaurantRegistration.this,"Error",task.getException().getMessage());
+                                                        }
                                                     }
                                                 });
 
-//                                                if(role.equals("Restaurant")) {
-//
-//                                                    firebaseDatabase.getInstance().getReference("Restaurant").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-//                                                            .setValue(hashMap1).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                                        @Override
-//                                                        public void onComplete(@NonNull Task<Void> task) {
-//                                                            dialog.dismiss();
-//
-//                                                            firebaseAuth.getCurrentUser().sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                                                @Override
-//                                                                public void onSuccess(Void unused) {
-//                                                                    if (task.isSuccessful()) {
-//                                                                        AlertDialog.Builder builder = new AlertDialog.Builder(RestaurantRegistration.this);
-//                                                                        builder.setMessage("You have successfully registered! Please verify your email to login");
-//                                                                        builder.setCancelable(false);
-//                                                                        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-//                                                                            @Override
-//                                                                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                                                                dialog.dismiss();
-//                                                                            }
-//                                                                        });
-//                                                                        AlertDialog alertDialog = builder.create();
-//                                                                        alertDialog.show();
-//                                                                    } else {
-//                                                                        dialog.dismiss();
-//                                                                        AlertDialogueBox.showAlert(RestaurantRegistration.this, "Error", task.getException().getMessage());
-//                                                                    }
-//
-//
-//                                                                }
-//                                                            });
-//                                                        }
-//                                                    });
-//                                                }
-//                                                if(role.equals("DeliveryGuy")) {
-//
-//                                                    firebaseDatabase.getInstance().getReference("DeliveryGuy").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-//                                                            .setValue(hashMap1).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                                        @Override
-//                                                        public void onComplete(@NonNull Task<Void> task) {
-//                                                            dialog.dismiss();
-//
-//                                                            firebaseAuth.getCurrentUser().sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                                                @Override
-//                                                                public void onSuccess(Void unused) {
-//                                                                    if (task.isSuccessful()) {
-//                                                                        AlertDialog.Builder builder = new AlertDialog.Builder(RestaurantRegistration.this);
-//                                                                        builder.setMessage("You have successfully registered! Please verify your email to login");
-//                                                                        builder.setCancelable(false);
-//                                                                        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-//                                                                            @Override
-//                                                                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                                                                dialog.dismiss();
-//                                                                            }
-//                                                                        });
-//                                                                        AlertDialog alertDialog = builder.create();
-//                                                                        alertDialog.show();
-//                                                                    } else {
-//                                                                        dialog.dismiss();
-//                                                                        AlertDialogueBox.showAlert(RestaurantRegistration.this, "Error", task.getException().getMessage());
-//                                                                    }
-//
-//
-//                                                                }
-//                                                            });
-//                                                        }
-//                                                    });
-//                                                }
-//                                                if(role.equals("Customer")) {
-//
-//                                                    firebaseDatabase.getInstance().getReference("Customer").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-//                                                            .setValue(hashMap1).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                                        @Override
-//                                                        public void onComplete(@NonNull Task<Void> task) {
-//                                                            dialog.dismiss();
-//
-//                                                            firebaseAuth.getCurrentUser().sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                                                @Override
-//                                                                public void onSuccess(Void unused) {
-//                                                                    if (task.isSuccessful()) {
-//                                                                        AlertDialog.Builder builder = new AlertDialog.Builder(RestaurantRegistration.this);
-//                                                                        builder.setMessage("You have successfully registered! Please verify your email to login");
-//                                                                        builder.setCancelable(false);
-//                                                                        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-//                                                                            @Override
-//                                                                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                                                                dialog.dismiss();
-//                                                                            }
-//                                                                        });
-//                                                                        AlertDialog alertDialog = builder.create();
-//                                                                        alertDialog.show();
-//                                                                    } else {
-//                                                                        dialog.dismiss();
-//                                                                        AlertDialogueBox.showAlert(RestaurantRegistration.this, "Error", task.getException().getMessage());
-//                                                                    }
-//
-//
-//                                                                }
-//                                                            });
-//                                                        }
-//                                                    });
-//                                                }
                                             }
                                         });
 
-                                    } else {
-                                        // If sign in fails, display a message to the user.
-                                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                        Toast.makeText(RestaurantRegistration.this, "Authentication failed.",
-                                                Toast.LENGTH_SHORT).show();
                                     }
-                                }
-                            });
-
-
-
-                   }
+                                });
+                            }
+                        }
+                    });
+                }
+//
             }
-
         });
 
-
-
-
-
-
     }
-    String emailpattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
+    String emailpattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     public boolean isValid(){
         email.setErrorEnabled(false);
         email.setError("");
