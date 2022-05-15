@@ -30,12 +30,9 @@ public class RestaurantEmailLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_email_login);
         try {
-            email= (TextInputLayout)findViewById(R.id.LoginEmailAddress);
+            email= (TextInputLayout)findViewById(R.id.loginEmailAddress);
             password=(TextInputLayout)findViewById(R.id.loginPassword);
-            signIn = (Button) findViewById(R.id.sendOTP);
-            signUp= (TextView) findViewById(R.id.phoneRegister);
             forgotPassword=(TextView) findViewById(R.id.forgotPassword);
-            singInPhone= (Button) findViewById(R.id.signInEmail);
 
             FAuth = FirebaseAuth.getInstance();
 

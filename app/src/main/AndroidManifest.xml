@@ -12,9 +12,6 @@
         android:theme="@style/Theme.FoodDeliveryApp"
         tools:replace="android:theme">
         <activity
-            android:name=".RestaurantSendOTP"
-            android:exported="false" />
-        <activity
             android:name=".RestaurantForgotPassword"
             android:exported="false" />
         <activity

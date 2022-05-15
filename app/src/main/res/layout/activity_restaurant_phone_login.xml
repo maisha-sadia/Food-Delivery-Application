@@ -32,9 +32,7 @@
             <com.hbb20.CountryCodePicker
                 android:id="@+id/countryCodeHolder"
                 android:layout_width="120dp"
-                android:layout_height="53dp"
-                app:ccp_defaultNameCode="GB">
-
+                android:layout_height="53dp">
 
             </com.hbb20.CountryCodePicker>
 
@@ -53,18 +51,18 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/sendOTP"
+            android:id="@+id/verifyNumberButton"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="20dp"
 
             android:backgroundTint="#7AC161"
-            android:text="Send Code"
+            android:text="Verify"
             android:textColor="#FFFF"
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/phoneRegister"
+            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -85,7 +83,7 @@
             android:textSize="18sp" />
 
         <Button
-            android:id="@+id/signInEmail"
+            android:id="@+id/btnemail"
             android:layout_width="105dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
