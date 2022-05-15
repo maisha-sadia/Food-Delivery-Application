@@ -47,7 +47,7 @@ public class RestaurantRegistration extends AppCompatActivity {
 
         forename = (TextInputLayout)findViewById(R.id.forename);
         surname = (TextInputLayout)findViewById(R.id.surname);
-        email = (TextInputLayout)findViewById(R.id.LoginEmailAddress);
+        email = (TextInputLayout)findViewById(R.id.registrationEmailAddress);
         password = (TextInputLayout)findViewById(R.id.password);
         confirmPassword = (TextInputLayout)findViewById(R.id.confirmPassword);
         phoneNumber = (TextInputLayout)findViewById(R.id.phoneNumber);

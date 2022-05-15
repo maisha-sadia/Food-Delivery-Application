@@ -79,11 +79,6 @@ public class SelectUser extends AppCompatActivity {
                     emailLogin.putExtra("Role","Restaurant");
                     startActivity(emailLogin);
                     finish();
-                } if(type.equals("Phone")){
-                    Intent phoneLogin = new Intent(SelectUser.this,RestaurantPhoneLogin.class);
-                    phoneLogin.putExtra("Role","Restaurant");
-                    startActivity(phoneLogin);
-                    finish();
                 } if(type.equals("Register")){
                     Intent registration = new Intent(SelectUser.this,RestaurantRegistration.class);
                     registration.putExtra("Role","Restaurant");
@@ -99,11 +94,6 @@ public class SelectUser extends AppCompatActivity {
                     Intent emailLogin = new Intent(SelectUser.this,RestaurantEmailLogin.class);
                     emailLogin.putExtra("Role","Customer");
                     startActivity(emailLogin);
-                    finish();
-                } if(type.equals("Phone")){
-                    Intent phoneLogin = new Intent(SelectUser.this,RestaurantPhoneLogin.class);
-                    phoneLogin.putExtra("Role","Customer");
-                    startActivity(phoneLogin);
                     finish();
                 } if(type.equals("Register")){
                     Intent registration = new Intent(SelectUser.this,RestaurantRegistration.class);
@@ -121,12 +111,7 @@ public class SelectUser extends AppCompatActivity {
                     emailLogin.putExtra("Role","DeliveryGuy");
                     startActivity(emailLogin);
                     finish();
-                } if(type.equals("Phone")){
-                    Intent phoneLogin = new Intent(SelectUser.this,RestaurantPhoneLogin.class);
-                    phoneLogin.putExtra("Role","DeliveryGuy");
-                    startActivity(phoneLogin);
-                    finish();
-                } if(type.equals("Register")){
+                }  if(type.equals("Register")){
                     Intent registration = new Intent(SelectUser.this,RestaurantRegistration.class);
                     registration.putExtra("Role","DeliveryGuy");
                     startActivity(registration);

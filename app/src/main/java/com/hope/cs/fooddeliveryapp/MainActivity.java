@@ -22,79 +22,10 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
-    FirebaseAuth FAuth;
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                Fauth = FirebaseAuth.getInstance();
-                if(Fauth.getCurrentUser()!=null){
-                    if(Fauth.getCurrentUser().isEmailVerified()){
-                        Fauth=FirebaseAuth.getInstance();
-
-                        databaseReference = FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getUid()+"/Role");
-                        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                String role = snapshot.getValue(String.class);
-                                if(role.equals("Restaurant")){
-                                    startActivity(new Intent(MainActivity.this,RestaurantPanel_BottomNav.class));
-                                    finish();
-
-                                }
-                                if(role.equals("Customer")){
-                                    startActivity(new Intent(MainActivity.this,CustomerPanel_BottomNav.class));
-                                    finish();
-
-                                }
-                                if(role.equals("DeliveryGuy")){
-                                    startActivity(new Intent(MainActivity.this,DeliveryGuyPanel_BottomNav.class));
-                                    finish();
-
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-                                Toast.makeText(MainActivity.this,error.getMessage(), Toast.LENGTH_LONG).show();
-
-                            }
-                        });
-                    }else{
-                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                        builder.setMessage("Check Whether You Have Verified Your Detail , Otherwise Please Verify");
-                        builder.setCancelable(false);
-                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                Intent intent = new Intent(MainActivity.this,MainMenu.class);
-                                startActivity(intent);
-                                finish();
-                            }
-                        });
-                        AlertDialog alertDialog = builder.create();
-                        alertDialog.show();
-                        FAuth.signOut();
-                    }
-                }else {
-
-                    Intent intent = new Intent(MainActivity.this, MainMenu.class);
-                    startActivity(intent);
-                    finish();
-                }
-
-            }
-        },1000);
 
     }
 

@@ -70,7 +70,7 @@ public class MainMenu extends AppCompatActivity {
         loginWithEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent signEmail = new Intent(MainMenu.this,SelectUser.class);
+                Intent signEmail = new Intent(MainMenu.this,RestaurantEmailLogin.class);
                 signEmail.putExtra("Home","Email");
                 startActivity(signEmail);
                 finish();

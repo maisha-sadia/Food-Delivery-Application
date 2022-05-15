@@ -32,7 +32,7 @@
             android:textStyle="bold" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/emailAddress"
+            android:id="@+id/loginEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="15dp"
@@ -40,7 +40,6 @@
             android:layout_marginRight="15dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/loginEmailAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_baseline_email_24"
@@ -74,7 +73,7 @@
                 android:textSize="16sp" />
 
             <Button
-                android:id="@+id/verifyNumberButton"
+                android:id="@+id/LoginButton"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"

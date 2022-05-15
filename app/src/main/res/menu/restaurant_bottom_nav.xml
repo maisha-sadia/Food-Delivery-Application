@@ -7,9 +7,13 @@
         android:icon="@drawable/home_icon"
         android:title="Home" />
     <item
-        android:id="@+id/order"
-        android:icon="@drawable/order_icon"
+        android:id="@+id/restaurantPendingOrder"
+        android:icon="@drawable/restaurant_icon"
         android:title="Orders Pending" />
+    <item
+        android:id="@+id/restaurantOrder"
+        android:icon="@drawable/order_icon"
+        android:title="Orders" />
     <item
         android:id="@+id/restaurantProfile"
         android:icon="@drawable/restaurant_menu_icon"

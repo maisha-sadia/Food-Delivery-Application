@@ -12,6 +12,12 @@
         android:theme="@style/Theme.FoodDeliveryApp"
         tools:replace="android:theme">
         <activity
+            android:name=".DeliveryGuyPanel_BottomNav"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerPanel_BottomNav"
+            android:exported="false" />
+        <activity
             android:name=".RestaurantForgotPassword"
             android:exported="false" />
         <activity
@@ -19,9 +25,6 @@
             android:exported="false" />
         <activity
             android:name=".RestaurantRegistration"
-            android:exported="false" />
-        <activity
-            android:name=".RestaurantPhoneLogin"
             android:exported="false" />
         <activity
             android:name=".RestaurantEmailLogin"

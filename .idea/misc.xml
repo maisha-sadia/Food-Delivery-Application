@@ -10,6 +10,7 @@
         <entry key="app/src/main/res/datasets/drawable/ic_fast_food_splash_logo.xml" value="0.233" />
         <entry key="app/src/main/res/datasets/drawable/restaurant_menu_icon.xml" value="0.225" />
         <entry key="app/src/main/res/layout/activity_customer_email_login.xml" value="0.20885416666666667" />
+        <entry key="app/src/main/res/layout/activity_customer_panel_bottom_nav.xml" value="0.20885416666666667" />
         <entry key="app/src/main/res/layout/activity_customer_phone_login.xml" value="0.20885416666666667" />
         <entry key="app/src/main/res/layout/activity_customer_registration.xml" value="0.23641304347826086" />
         <entry key="app/src/main/res/layout/activity_delivery_guy_email_login.xml" value="0.26403985507246375" />
