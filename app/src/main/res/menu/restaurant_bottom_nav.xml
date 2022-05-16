@@ -16,6 +16,6 @@
         android:title="Orders" />
     <item
         android:id="@+id/restaurantProfile"
-        android:icon="@drawable/restaurant_menu_icon"
+        android:icon="@drawable/add_icon"
         android:title="Add New Dish" />
 </menu>

@@ -2,7 +2,20 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/res_home_bg"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
+    <Button
+        android:id="@+id/post_dish"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#86E475"
+        android:shadowColor="@color/Black"
+        android:shadowRadius="5"
+        android:text="Post Dish"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="-44dp"
+        tools:layout_editor_absoluteY="654dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

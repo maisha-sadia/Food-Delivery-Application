@@ -27,8 +27,8 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Please verify your number"
-            android:textSize="20sp"
+            android:text="Please Insert Your Login Details"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:text="Don't Have An Account?"
+                android:text="Don't Have An Account? Register Now"
                 android:textColor="#090909"
                 android:textSize="16sp" />
 

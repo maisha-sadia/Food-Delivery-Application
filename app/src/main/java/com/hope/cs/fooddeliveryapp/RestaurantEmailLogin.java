@@ -34,6 +34,7 @@ public class RestaurantEmailLogin extends AppCompatActivity {
             password=(TextInputLayout)findViewById(R.id.loginPassword);
             forgotPassword=(TextView) findViewById(R.id.forgotPassword);
             signIn = (Button) findViewById(R.id.LoginButton);
+            signUp=(TextView) findViewById(R.id.textView3);
             FAuth = FirebaseAuth.getInstance();
 
             signIn.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +81,7 @@ public class RestaurantEmailLogin extends AppCompatActivity {
                 public void onClick(View view) {
 //                    Takes the user to the select user phase where they can choose the type of user they want to register as
                     Intent registration = new Intent(RestaurantEmailLogin.this,SelectUser.class);
-                    registration.putExtra("Home","Registration");
+                    registration.putExtra("Home","Register");
                     startActivity(registration);
                     finish();
                 }

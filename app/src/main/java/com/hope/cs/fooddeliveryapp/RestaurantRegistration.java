@@ -28,8 +28,6 @@ import java.util.HashMap;
 
 
 public class RestaurantRegistration extends AppCompatActivity {
-    String[] Maharashtra = {"Mumbai","Pune","Nashik"};
-    String[] Madhyapradesh = {"Bhopal","Indore","Ujjain"};
 
     TextInputLayout forename,surname,email,password,confirmPassword,phoneNumber,postCode,area,houseNumber;
     Spinner citySpin;
@@ -38,7 +36,7 @@ public class RestaurantRegistration extends AppCompatActivity {
     FirebaseAuth FAuth;
     DatabaseReference databaseReference;
     FirebaseDatabase firebaseDatabase;
-    String Fname,Sname,EmailId,Pass,CPass, PNum,HNum,PCode,Area, City;
+    String Forename,Surname,EmailId,Password,ConfirmPass, PhoneNum,HouseNum,PostCode,Area, City;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,15 +97,15 @@ public class RestaurantRegistration extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Fname = forename.getEditText().getText().toString().trim();
-                Sname = surname.getEditText().getText().toString().trim();
+                Forename = forename.getEditText().getText().toString().trim();
+                Surname = surname.getEditText().getText().toString().trim();
                 EmailId = email.getEditText().getText().toString().trim();
-                Pass = password.getEditText().getText().toString().trim();
-                CPass = confirmPassword.getEditText().getText().toString().trim();
-                PNum = phoneNumber.getEditText().getText().toString().trim();
+                Password = password.getEditText().getText().toString().trim();
+                ConfirmPass = confirmPassword.getEditText().getText().toString().trim();
+                PhoneNum = phoneNumber.getEditText().getText().toString().trim();
                 Area = area.getEditText().getText().toString().trim();
-                HNum = houseNumber.getEditText().getText().toString().trim();
-                PCode = postCode.getEditText().getText().toString().trim();
+                HouseNum = houseNumber.getEditText().getText().toString().trim();
+                PostCode = postCode.getEditText().getText().toString().trim();
 
                 if (isValid()){
                     final ProgressDialog mDialog = new ProgressDialog(RestaurantRegistration.this);
@@ -116,7 +114,7 @@ public class RestaurantRegistration extends AppCompatActivity {
                     mDialog.setMessage("Please wait");
                     mDialog.show();
 
-                    FAuth.createUserWithEmailAndPassword(EmailId,Pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    FAuth.createUserWithEmailAndPassword(EmailId,Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
 
@@ -130,17 +128,17 @@ public class RestaurantRegistration extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<Void> task) {
 
                                         HashMap<String,String> hashMap1 = new HashMap<>();
-                                        hashMap1.put("First Name",Fname);
-                                        hashMap1.put("Last Name",Sname);
+                                        hashMap1.put("First Name",Forename);
+                                        hashMap1.put("Last Name",Surname);
                                         hashMap1.put("Email Address",EmailId);
-                                        hashMap1.put("Phone Number",PNum);
+                                        hashMap1.put("Phone Number",PhoneNum);
                                         hashMap1.put("Area",Area);
-                                        hashMap1.put("House Number",HNum);
-                                        hashMap1.put("Post Code",PCode);
+                                        hashMap1.put("House Number",HouseNum);
+                                        hashMap1.put("Post Code",PostCode);
                                         hashMap1.put("Area",Area);
                                         hashMap1.put("City",City);
-                                        hashMap1.put("Password",Pass);
-                                        hashMap1.put("Confirm Password",CPass);
+                                        hashMap1.put("Password",Password);
+                                        hashMap1.put("Confirm Password",ConfirmPass);
 
 
                                         firebaseDatabase.getInstance().getReference(role)
@@ -213,13 +211,13 @@ public class RestaurantRegistration extends AppCompatActivity {
         postCode.setError("");
 
         boolean isValid=false,isValidhouseno=false,isValidlname=false,isValidname=false,isValidemail=false,isValidpassword=false,isValidconfpassword=false,isValidmobilenum=false,isValidarea=false,isValidpincode=false;
-        if(TextUtils.isEmpty(Fname)){
+        if(TextUtils.isEmpty(Forename)){
             forename.setErrorEnabled(true);
             forename.setError("Enter First Name");
         }else{
             isValidname = true;
         }
-        if(TextUtils.isEmpty(Sname)){
+        if(TextUtils.isEmpty(Surname)){
             surname.setErrorEnabled(true);
             surname.setError("Enter Last Name");
         }else{
@@ -236,33 +234,33 @@ public class RestaurantRegistration extends AppCompatActivity {
                 email.setError("Enter a Valid Email Id");
             }
         }
-        if(TextUtils.isEmpty(Pass)){
+        if(TextUtils.isEmpty(Password)){
             password.setErrorEnabled(true);
             password.setError("Enter Password");
         }else{
-            if(Pass.length()<8){
+            if(Password.length()<8){
                 password.setErrorEnabled(true);
                 password.setError("Password is Weak");
             }else{
                 isValidpassword = true;
             }
         }
-        if(TextUtils.isEmpty(CPass)){
+        if(TextUtils.isEmpty(ConfirmPass)){
             confirmPassword.setErrorEnabled(true);
             confirmPassword.setError("Enter Password Again");
         }else{
-            if(!Pass.equals(CPass)){
+            if(!Password.equals(ConfirmPass)){
                 confirmPassword.setErrorEnabled(true);
                 confirmPassword.setError("Password Doesn't Match");
             }else{
                 isValidconfpassword = true;
             }
         }
-        if(TextUtils.isEmpty(PNum)){
+        if(TextUtils.isEmpty(PhoneNum)){
             phoneNumber.setErrorEnabled(true);
             phoneNumber.setError("Mobile Number Is Required");
         }else{
-            if(PNum.length()<10){
+            if(PhoneNum.length()<10){
                 phoneNumber.setErrorEnabled(true);
                 phoneNumber.setError("Invalid Mobile Number");
             }else{
@@ -275,13 +273,13 @@ public class RestaurantRegistration extends AppCompatActivity {
         }else{
             isValidarea = true;
         }
-        if(TextUtils.isEmpty(PCode)){
+        if(TextUtils.isEmpty(PostCode)){
             postCode.setErrorEnabled(true);
             postCode.setError("Please Enter PostCode");
         }else{
             isValidpincode = true;
         }
-        if(TextUtils.isEmpty(HNum)){
+        if(TextUtils.isEmpty(HouseNum)){
             houseNumber.setErrorEnabled(true);
             houseNumber.setError("Fields Can't Be Empty");
         }else{

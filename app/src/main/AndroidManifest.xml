@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.hope.cs.fooddeliveryapp">
+    package="com.hope.cs.fooddeliveryapp" >
 
     <application
         android:allowBackup="true"
@@ -10,7 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodDeliveryApp"
-        tools:replace="android:theme">
+        tools:replace="android:theme" >
+        <activity
+            android:name=".resFoodPanel.restaurantPostDish"
+            android:exported="false" />
         <activity
             android:name=".DeliveryGuyPanel_BottomNav"
             android:exported="false" />
@@ -37,7 +40,7 @@
             android:exported="false" />
         <activity
             android:name=".SplashScreenActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,7 +49,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
