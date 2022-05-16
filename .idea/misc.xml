@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/datasets/drawable/camera_icon.xml" value="0.225" />
         <entry key="app/src/main/res/datasets/drawable/email_icon.xml" value="0.211" />
         <entry key="app/src/main/res/datasets/drawable/home_icon.xml" value="0.225" />
         <entry key="app/src/main/res/datasets/drawable/ic_baseline_email_24.xml" value="0.225" />

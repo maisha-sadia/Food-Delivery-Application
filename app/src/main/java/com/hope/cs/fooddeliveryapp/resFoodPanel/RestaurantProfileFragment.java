@@ -23,7 +23,7 @@ public class RestaurantProfileFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_res_orders,null);
+        View view = inflater.inflate(R.layout.fragment_res_profile,null);
         getActivity().setTitle("Post New Dish");
         AnimationDrawable animationDrawable = new AnimationDrawable();
         animationDrawable.addFrame(getResources().getDrawable(R.drawable.bg_image),3000);

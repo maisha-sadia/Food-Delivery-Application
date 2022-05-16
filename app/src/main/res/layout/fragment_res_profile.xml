@@ -10,12 +10,13 @@
         android:id="@+id/post_dish"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#86E475"
+        android:layout_marginBottom="72dp"
+        android:background="@color/green"
         android:shadowColor="@color/Black"
-        android:shadowRadius="5"
-        android:text="Post Dish"
+        android:shadowRadius="10"
+        android:text="Click here to Post Dish"
         android:textColor="@color/white"
-        android:textSize="20sp"
-        tools:layout_editor_absoluteX="-44dp"
-        tools:layout_editor_absoluteY="654dp" />
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="-16dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

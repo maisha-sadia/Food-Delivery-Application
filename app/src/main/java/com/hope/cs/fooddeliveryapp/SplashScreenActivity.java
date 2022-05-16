@@ -59,6 +59,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             @Override
             public void run() {
                 FAuth = FirebaseAuth.getInstance();
+
                 if(FAuth.getCurrentUser()!=null){
 
                     if(FAuth.getCurrentUser().isEmailVerified()){
