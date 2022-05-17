@@ -82,7 +82,7 @@ public class activity_update_delete_dish extends AppCompatActivity {
         ID = getIntent().getStringExtra("updatedeletedish");
 
         final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        data = firebaseDatabase.getInstance().getReference("Restaurant").child(userId);
+        data = firebaseDatabase.getInstance().getReference("Restaurant").child(userId).child(ID);
         data.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -189,7 +189,7 @@ public class activity_update_delete_dish extends AppCompatActivity {
         restaurantId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         Food_Details info = new Food_Details(dishes,quantity,price,description,buri,ID,restaurantId);
         firebaseDatabase.getInstance().getReference("Food_Details").child(City).child(Area)
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(ID)
                 .setValue(info).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
