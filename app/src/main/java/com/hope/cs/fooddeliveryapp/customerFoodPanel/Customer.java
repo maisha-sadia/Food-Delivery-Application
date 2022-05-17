@@ -1,5 +1,5 @@
 package com.hope.cs.fooddeliveryapp.customerFoodPanel;
-
+//Customer Class
 public class Customer {
     private String city,FirstName,LastName,Password,ConfirmPassword,EmailId,MobileNo,Area,LocalAddress;
 

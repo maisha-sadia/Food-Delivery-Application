@@ -44,16 +44,18 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.util.UUID;
 
+
+
 public class activity_update_delete_dish extends AppCompatActivity {
 
     TextInputLayout desc,qty,pri;
-    TextView Dishname;
+    TextView ItemName;
     ImageButton imageButton;
-    Uri imageuri;
-    String dburi;
-    private Uri mCropimageuri;
-    Button Update_dish,Delete_dish;
-    String description,quantity,price,dishes,ChefId;
+    Uri imageUri;
+    String dbUri;
+    private Uri CropImageUri;
+    Button updateItem,deleteItem;
+    String description,quantity,price,dishes,restaurantId;
     String RandomUID;
     StorageReference ref;
     FirebaseStorage storage;
@@ -63,32 +65,32 @@ public class activity_update_delete_dish extends AppCompatActivity {
     FirebaseAuth FAuth;
     String ID;
     private ProgressDialog progressDialog;
-    DatabaseReference dataa;
+    DatabaseReference data;
     String City,Area;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_delete_dish);
-        desc = (TextInputLayout)findViewById(R.id.description);
-        qty = (TextInputLayout) findViewById(R.id.Quantity);
-        pri = (TextInputLayout)findViewById(R.id.price);
-        Dishname = (TextView)findViewById(R.id.dish_name);
-        imageButton = (ImageButton) findViewById(R.id.image_upload);
-        Update_dish = (Button)findViewById(R.id.Updatedish);
-        Delete_dish = (Button)findViewById(R.id.Deletedish);
+        desc = (TextInputLayout)findViewById(R.id.description_update);
+        qty = (TextInputLayout) findViewById(R.id.quantity_update);
+        pri = (TextInputLayout)findViewById(R.id.price_update);
+        ItemName = (TextView)findViewById(R.id.dish_name);
+        imageButton = (ImageButton) findViewById(R.id.image_upload_update);
+        updateItem = (Button)findViewById(R.id.Updatedish);
+        deleteItem = (Button)findViewById(R.id.Deletedish);
         ID = getIntent().getStringExtra("updatedeletedish");
 
-        final String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        dataa = firebaseDatabase.getInstance().getReference("Restaurant").child(userid);
-        dataa.addListenerForSingleValueEvent(new ValueEventListener() {
+        final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        data = firebaseDatabase.getInstance().getReference("Restaurant").child(userId);
+        data.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Restaurant restaurant = snapshot.getValue(Restaurant.class);
                 City = restaurant.getCity();
                 Area = restaurant.getArea();
 
-                Update_dish.setOnClickListener(new View.OnClickListener() {
+                updateItem.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         description = desc.getEditText().getText().toString().trim();
@@ -96,16 +98,16 @@ public class activity_update_delete_dish extends AppCompatActivity {
                         price = pri.getEditText().getText().toString().trim();
 
                         if(isValid()){
-                            if(imageuri != null){
+                            if(imageUri != null){
                                 uploadImage();
                             }else{
-                                updatedesc(dburi);
+                                updateDescription(dbUri);
                             }
                         }
 
                     }
                 });
-                Delete_dish.setOnClickListener(new View.OnClickListener() {
+                deleteItem.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(activity_update_delete_dish.this);
@@ -138,21 +140,21 @@ public class activity_update_delete_dish extends AppCompatActivity {
                     }
                 });
 
-                String useridd = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                String userIdd = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 progressDialog = new ProgressDialog(activity_update_delete_dish.this);
                 databaseReference = FirebaseDatabase.getInstance().getReference("Food_Details").child(City).child(Area)
-                        .child(useridd);
+                        .child(userIdd);
                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         UpdateDish updateDishModel = snapshot.getValue(UpdateDish.class);
                         desc.getEditText().setText(updateDishModel.getDescription());
                         qty.getEditText().setText(updateDishModel.getQuantity());
-                        Dishname.setText("Dish name:"+updateDishModel.getDishes());
+                        ItemName.setText("Dish name:"+updateDishModel.getDishes());
                         dishes=updateDishModel.getDishes();
                         pri.getEditText().setText(updateDishModel.getPrice());
                         Glide.with(activity_update_delete_dish.this).load(updateDishModel.getImageURL()).into(imageButton);
-                        dburi = updateDishModel.getImageURL();
+                        dbUri = updateDishModel.getImageURL();
                     }
 
                     @Override
@@ -166,8 +168,8 @@ public class activity_update_delete_dish extends AppCompatActivity {
                 storageReference = storage.getReference();
                 imageButton.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
-                        onSelectImageclick(v);
+                    public void onClick(View view) {
+                        onSelectImage(view);
                     }
                 });
 
@@ -182,12 +184,12 @@ public class activity_update_delete_dish extends AppCompatActivity {
 
     }
 
-    private void updatedesc(String buri) {
+    private void updateDescription(String buri) {
 
-        ChefId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        Food_Details info = new Food_Details(dishes,quantity,price,description,buri,ID,ChefId);
+        restaurantId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        Food_Details info = new Food_Details(dishes,quantity,price,description,buri,ID,restaurantId);
         firebaseDatabase.getInstance().getReference("Food_Details").child(City).child(Area)
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(ID)
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .setValue(info).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -199,19 +201,19 @@ public class activity_update_delete_dish extends AppCompatActivity {
 
     private void uploadImage() {
 
-        if(imageuri != null){
+        if(imageUri != null){
 
             progressDialog.setTitle("Uploading....");
             progressDialog.show();
             RandomUID = UUID.randomUUID().toString();
             ref = storageReference.child(RandomUID);
-            ref.putFile(imageuri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            ref.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            updatedesc(String.valueOf(uri));
+                            updateDescription(String.valueOf(uri));
                         }
                     });
                 }
@@ -266,21 +268,21 @@ public class activity_update_delete_dish extends AppCompatActivity {
         return isValid;
     }
 
-    private void startCropImageActivity(Uri imageuri){
-        CropImage.activity(imageuri)
+    private void startCropImageActivity(Uri imageUri){
+        CropImage.activity(imageUri)
                 .setGuidelines(CropImageView.Guidelines.ON)
                 .setMultiTouchEnabled(true)
                 .start(this);
     }
-    private void onSelectImageclick(View v){
+    private void onSelectImage(View v){
         CropImage.startPickImageActivity(this);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (mCropimageuri != null && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            startCropImageActivity(mCropimageuri);
+        if (CropImageUri != null && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            startCropImageActivity(CropImageUri);
         } else {
             Toast.makeText(this, "Cancelling! Permission Not Granted", Toast.LENGTH_SHORT).show();
         }
@@ -291,18 +293,18 @@ public class activity_update_delete_dish extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
         if(requestCode==CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE && resultCode== Activity.RESULT_OK){
-            imageuri = CropImage.getPickImageResultUri(this,data);
-            if(CropImage.isReadExternalStoragePermissionsRequired(this,imageuri)){
-                mCropimageuri = imageuri;
+            imageUri = CropImage.getPickImageResultUri(this,data);
+            if(CropImage.isReadExternalStoragePermissionsRequired(this,imageUri)){
+                CropImageUri = imageUri;
                 requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},0);
             }else{
-                startCropImageActivity(imageuri);
+                startCropImageActivity(imageUri);
             }
         }
         if(requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if(resultCode==RESULT_OK){
-                ((ImageButton) findViewById(R.id.image_upload)).setImageURI(result.getUri());
+                ((ImageButton) findViewById(R.id.image_upload_update)).setImageURI(result.getUri());
                 Toast.makeText(this,"Cropped Successfully!"+result.getSampleSize(),Toast.LENGTH_SHORT).show();
             }else if(resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
                 Toast.makeText(this,"Failed To Crop"+result.getError(),Toast.LENGTH_SHORT).show();
