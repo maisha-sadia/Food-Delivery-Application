@@ -3,11 +3,16 @@ package com.hope.cs.fooddeliveryapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.hope.cs.fooddeliveryapp.customerFoodPanel.CustomerHomeFragment;
+import com.hope.cs.fooddeliveryapp.customerFoodPanel.CustomerOrdersFragment;
+import com.hope.cs.fooddeliveryapp.customerFoodPanel.CustomerTrackerFragment;
 import com.hope.cs.fooddeliveryapp.resFoodPanel.RestaurantHomeFragment;
 import com.hope.cs.fooddeliveryapp.resFoodPanel.RestaurantOrderFragment;
 import com.hope.cs.fooddeliveryapp.resFoodPanel.RestaurantPendingOrdersFragment;
@@ -21,6 +26,22 @@ public class RestaurantPanel_BottomNav extends AppCompatActivity implements Bott
         setContentView(R.layout.activity_restaurant_panel_bottom_nav);
         BottomNavigationView navigationView = findViewById(R.id.res_bottom_nav);
         navigationView.setOnNavigationItemSelectedListener(this);
+        String name = getIntent().getStringExtra("PAGE");
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        if(name!=null){
+            if(name.equalsIgnoreCase("OrderPage")){
+                loadResFragment(new RestaurantPendingOrdersFragment());
+            }else if(name.equalsIgnoreCase("ConfirmingOrderPage")){
+                loadResFragment(new RestaurantOrderFragment());
+            }else if(name.equalsIgnoreCase("AcceptingOrder")){
+                loadResFragment(new RestaurantOrderFragment());
+            }else if(name.equalsIgnoreCase("DeliveredPage")){
+                loadResFragment(new RestaurantOrderFragment());
+            }
+        }else{
+            loadResFragment(new RestaurantHomeFragment());
+        }
 
          }
 
@@ -47,7 +68,7 @@ public class RestaurantPanel_BottomNav extends AppCompatActivity implements Bott
 
     private boolean loadResFragment(Fragment fragment) {
         if(fragment != null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,fragment).commit();
             return true;
         }
         return false;

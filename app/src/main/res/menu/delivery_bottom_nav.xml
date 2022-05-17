@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/delivery_pending_orders"
+        android:icon="@drawable/time_icon"
+        android:title="Pending Oders" />
+    <item
+        android:id="@+id/delivery_shipping_orders"
+        android:icon="@drawable/delivery_icon"
+        android:title="Take Orders" />
+</menu>

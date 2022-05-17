@@ -6,4 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".CustomerPanel_BottomNav">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragment_container3" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/cus_bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="?android:attr/windowBackground"
+        android:backgroundTint="@color/white"
+        app:itemIconTint="@color/Black"
+        app:itemTextColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/customer_bottom_nav" />
 </androidx.constraintlayout.widget.ConstraintLayout>
