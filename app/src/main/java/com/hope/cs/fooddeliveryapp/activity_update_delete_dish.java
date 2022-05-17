@@ -114,7 +114,7 @@ public class activity_update_delete_dish extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 firebaseDatabase.getInstance().getReference("Food_Details").child(City).child(Area)
-                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(ID).removeValue();
+                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).removeValue();
                                 AlertDialog.Builder food = new AlertDialog.Builder(activity_update_delete_dish.this);
                                 food.setMessage("Your Dish Has Been Deleted!");
                                 food.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -141,7 +141,7 @@ public class activity_update_delete_dish extends AppCompatActivity {
                 String useridd = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 progressDialog = new ProgressDialog(activity_update_delete_dish.this);
                 databaseReference = FirebaseDatabase.getInstance().getReference("Food_Details").child(City).child(Area)
-                        .child(useridd).child(ID);
+                        .child(useridd);
                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -161,7 +161,7 @@ public class activity_update_delete_dish extends AppCompatActivity {
                     }
                 });
                 FAuth = FirebaseAuth.getInstance();
-                databaseReference = firebaseDatabase.getInstance().getReference("FoodDetails");
+                databaseReference = firebaseDatabase.getInstance().getReference("Food_Details");
                 storage = FirebaseStorage.getInstance();
                 storageReference = storage.getReference();
                 imageButton.setOnClickListener(new View.OnClickListener() {

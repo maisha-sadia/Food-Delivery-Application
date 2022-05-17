@@ -2,6 +2,7 @@ package com.hope.cs.fooddeliveryapp.resFoodPanel;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -50,6 +51,8 @@ public class RestaurantHomeFragment extends Fragment {
         dataa.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d("Here","dataa");
+
                 Restaurant restaurant = snapshot.getValue(Restaurant.class);
                 City = restaurant.getCity();
                 Area = restaurant.getArea();
@@ -66,6 +69,26 @@ public class RestaurantHomeFragment extends Fragment {
     }
 
     private void RestaurantDishes() {
+        String useridd = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        Log.d("user",useridd);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Food_Details").child(City).child(Area).child(useridd);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                updateDishModelList.clear();
+                for(DataSnapshot snapshot1:snapshot.getChildren()){
+                    UpdateDish updateDishModel = snapshot1.getValue(UpdateDish.class);
+                    updateDishModelList.add(updateDishModel);
+                }
+                adapter = new RestaurantHomeAdapter(getContext(),updateDishModelList);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override
