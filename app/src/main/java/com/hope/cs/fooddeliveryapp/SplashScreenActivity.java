@@ -96,7 +96,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                         });
                     }else{
                         AlertDialog.Builder builder = new AlertDialog.Builder(SplashScreenActivity.this);
-                        builder.setMessage("Check Whether You Have Verified Your Detail , Otherwise Please Verify");
+                        builder.setMessage("Please verify your email");
                         builder.setCancelable(false);
                         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
