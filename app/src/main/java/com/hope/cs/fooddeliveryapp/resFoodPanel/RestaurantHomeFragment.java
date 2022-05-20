@@ -69,7 +69,6 @@ public class RestaurantHomeFragment extends Fragment {
 
     private void RestaurantDishes() {
         String useridd = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        Log.d("user",useridd);
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Food_Details").child(City).child(Area).child(useridd);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
