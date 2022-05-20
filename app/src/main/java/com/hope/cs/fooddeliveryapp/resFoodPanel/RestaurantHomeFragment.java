@@ -51,7 +51,6 @@ public class RestaurantHomeFragment extends Fragment {
         dataa.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("Here","dataa");
 
                 Restaurant restaurant = snapshot.getValue(Restaurant.class);
                 City = restaurant.getCity();
