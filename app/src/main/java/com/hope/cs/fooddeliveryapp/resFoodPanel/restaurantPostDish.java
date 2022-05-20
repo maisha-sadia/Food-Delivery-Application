@@ -124,7 +124,7 @@ public class restaurantPostDish extends AppCompatActivity {
 
         if(imageUri != null){
             final ProgressDialog progressDialog = new ProgressDialog(restaurantPostDish.this);
-            progressDialog.setTitle("Uploading.....");
+            progressDialog.setTitle("Uploading");
             progressDialog.show();
             RandomUID = UUID.randomUUID().toString();
             ref = storageReference.child(RandomUID);
